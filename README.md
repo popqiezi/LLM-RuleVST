@@ -116,4 +116,3 @@ Email: [popqiezi@gmail.com](mailto:popqiezi@gmail.com)
 
 ---
 
-If you want, I can also help you make a **more “top conference style” README** (with badges, figures, pipeline diagram, and demo GIF section) so your GitHub looks much more publish-ready.
