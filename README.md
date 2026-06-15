@@ -1,6 +1,6 @@
 
 
-# 🚢 LLM-RuleVST (YOLO Module Only)
+# 🚢 LLM-RuleVST 
 
 ## 📌 Overview
 
