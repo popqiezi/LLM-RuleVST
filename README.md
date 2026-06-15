@@ -1,6 +1,4 @@
-Here is a **clean, copy-paste ready English README.md** (simplified, no project structure section):
 
----
 
 # 🚢 LLM-RuleVST (YOLO Module Only)
 
