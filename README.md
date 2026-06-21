@@ -20,7 +20,7 @@ Currently available:
 * Basic training and inference scripts
 * Preliminary support for UAV-based inland waterway vessel perception
 
-Other modules, including LLM-based rule reasoning, trajectory prediction, and collision risk prediction, are still being organized and will be updated later.
+Other modules are still being organized and will be updated later.
 
 ---
 
@@ -42,7 +42,9 @@ python infer.py --weights best.pt --source test_images/
 
 ## 📊 Dataset
 
-The dataset used in this work is not publicly available at this stage.
+The dataset is currently being organized and partially released here:
+
+https://github.com/popqiezi/UAV-TSD
 
 ---
 
