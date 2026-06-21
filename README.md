@@ -10,34 +10,6 @@ The codebase is currently being organized and improved. At this stage, only part
 
 ---
 
-## 🚧 Current Status
-
-This repository is still under preparation.
-
-Currently available:
-
-* YOLO-based UAV vessel detection module
-* Basic training and inference scripts
-* Preliminary support for UAV-based inland waterway vessel perception
-
-Other modules are still being organized and will be updated later.
-
----
-
-## 🚀 Usage
-
-### Training
-
-```bash
-python train.py --config config.yaml
-```
-
-### Inference
-
-```bash
-python infer.py --weights best.pt --source test_images/
-```
-
 ---
 
 ## 📊 Dataset
