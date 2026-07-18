@@ -1,0 +1,250 @@
+experiment:
+  name: LLM-RuleVST
+  number_of_runs: 5
+  random_seeds:
+    - 17
+    - 29
+    - 43
+    - 71
+    - 97
+
+  fixed_data_partition: true
+  identical_preprocessing_across_runs: true
+  deterministic_execution: true
+
+data:
+  temporal_features:
+    - longitude
+    - latitude
+    - sog
+    - cog
+
+  temporal_input_dimension: 4
+  historical_sequence_length: 40
+  prediction_horizon: 20
+
+rule_vocabulary:
+  special_tokens:
+    PAD: 0
+    UNK: 1
+
+  encounter_type:
+    vocabulary_size: 8
+    mapping:
+      head_on: 2
+      crossing: 3
+      overtaking: 4
+      boundary_constrained: 5
+      bridge_constrained: 6
+      none: 7
+
+  active_rule:
+    vocabulary_size: 12
+    mapping:
+      Rule5: 2
+      Rule7: 3
+      Rule8: 4
+      Rule13: 5
+      Rule14: 6
+      Rule15: 7
+      Rule16: 8
+      Rule17: 9
+      Local-Channel: 10
+      Local-Bridge: 11
+
+  own_role:
+    vocabulary_size: 8
+    mapping:
+      give_way: 2
+      stand_on: 3
+      overtaking_vessel: 4
+      overtaken_vessel: 5
+      keep_channel: 6
+      unconstrained: 7
+
+  compliance_state:
+    vocabulary_size: 5
+    mapping:
+      compliant: 2
+      warning: 3
+      violation: 4
+
+  violation_action:
+    vocabulary_size: 12
+    mapping:
+      none: 2
+      late_turn: 3
+      no_give_way: 4
+      improper_crossing: 5
+      improper_overtaking: 6
+      no_speed_adjustment: 7
+      excessive_speed: 8
+      insufficient_speed: 9
+      channel_deviation: 10
+      improper_bridge_approach: 11
+
+model:
+  latent_dimension: 512
+
+  temporal_encoder:
+    architecture: transformer_encoder
+    input_dimension: 4
+    input_projection_dimension: 512
+
+    number_of_layers: 2
+    number_of_attention_heads: 8
+    attention_head_dimension: 64
+
+    feedforward_dimension: 2048
+    activation: gelu
+    dropout: 0.1
+
+    positional_encoding:
+      type: fixed_sinusoidal
+      maximum_sequence_length: 40
+
+    normalization:
+      type: pre_layer_norm
+      layer_norm_epsilon: 1.0e-5
+
+  rule_encoder:
+    number_of_rule_fields: 5
+    fields:
+      - encounter_type
+      - active_rule
+      - own_role
+      - compliance_state
+      - violation_action
+
+    embedding_dimension_per_field: 16
+    concatenated_embedding_dimension: 80
+    output_projection_dimension: 512
+
+    activation: gelu
+    dropout: 0.1
+
+    normalization:
+      type: layer_norm
+      layer_norm_epsilon: 1.0e-5
+
+  cross_fusion:
+    architecture: time_step_level_cross_attention
+    number_of_layers: 1
+
+    query_source: temporal_representation
+    key_source: rule_representation
+    value_source: rule_representation
+
+    latent_dimension: 512
+    number_of_attention_heads: 8
+    attention_head_dimension: 64
+
+    feedforward_dimension: 2048
+    activation: gelu
+    dropout: 0.1
+
+    normalization:
+      type: pre_layer_norm
+      layer_norm_epsilon: 1.0e-5
+
+  trajectory_decoder:
+    input_source: last_fused_time_step
+    input_dimension: 512
+
+    hidden_layers:
+      - 256
+
+    activation: gelu
+    dropout: 0.1
+
+    output_dimension: 40
+    output_shape:
+      - 20
+      - 2
+
+    output_variables:
+      - longitude
+      - latitude
+
+    output_activation: none
+
+  risk_decoder:
+    input_source: last_fused_time_step
+    input_dimension: 512
+
+    hidden_layers:
+      - 128
+
+    activation: gelu
+    dropout: 0.1
+
+    output_dimension: 20
+    output_shape:
+      - 20
+      - 1
+
+    output_variable: CRI
+    output_activation: sigmoid
+
+training:
+  optimizer:
+    type: adam
+    initial_learning_rate: 1.0e-4
+    weight_decay: 1.0e-5
+
+  learning_rate_schedule:
+    type: cosine_annealing
+
+  batch_size: 32
+  gradient_clip_norm: 1.0
+
+  training_stages:
+    uav_tsd_pretraining:
+      epochs: 50
+
+    joint_prediction_training:
+      epochs: 200
+
+  loss_weights:
+    center_refinement: 0.5
+    trajectory_prediction: 1.0
+    risk_prediction: 0.5
+
+  early_stopping:
+    enabled: false
+    reason: fixed_epoch_training_reported_in_table_2
+
+  checkpoint_selection:
+    monitor: validation_total_loss
+    mode: minimum
+    evaluation_frequency: every_epoch
+    selected_checkpoint: lowest_validation_total_loss
+
+reproducibility:
+  control_python_random_state: true
+  control_numpy_random_state: true
+  control_pytorch_cpu_random_state: true
+  control_pytorch_cuda_random_state: true
+  control_dataloader_random_state: true
+
+  cudnn_deterministic: true
+  cudnn_benchmark: false
+
+parameter_reporting:
+  counting_script: scripts/count_parameters.py
+
+  prediction_network_scope:
+    include:
+      - temporal_encoder
+      - rule_encoder
+      - cross_fusion
+      - trajectory_decoder
+      - risk_decoder
+
+    exclude:
+      - frozen_qwen3
+      - yolov10_detector
+      - separately_trained_visual_perception_modules
+
+  exact_trainable_parameter_count: TO_BE_FILLED_FROM_SCRIPT
+  exact_total_parameter_count: TO_BE_FILLED_FROM_SCRIPT
