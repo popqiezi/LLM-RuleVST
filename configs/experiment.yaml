@@ -1,0 +1,274 @@
+experiment:
+  name: LLM-RuleVST
+  fixed_data_partition: true
+  identical_preprocessing_across_runs: true
+
+  evaluation_protocols:
+    trajectory_comparison:
+      number_of_runs: 5
+      random_seeds:
+        - 17
+        - 29
+        - 43
+        - 71
+        - 97
+
+    collision_risk_comparison:
+      number_of_runs: 1
+      random_seed: 43
+
+    ablation_study:
+      number_of_runs: 1
+      random_seed: 43
+
+data:
+  temporal_features:
+    - longitude
+    - latitude
+    - sog
+    - cog
+
+  temporal_input_dimension: 4
+  historical_sequence_length: 40
+  prediction_horizon: 20
+  sequence_order: oldest_to_latest
+
+  normalization:
+    method: z_score
+    statistics_source: training_set_only
+    saved_statistics_file: configs/normalization_statistics.json
+
+rule_vocabulary:
+  vocabulary_size_includes_special_tokens: true
+
+  special_tokens:
+    PAD: 0
+    UNK: 1
+
+  encounter_type:
+    vocabulary_size: 8
+    mapping:
+      head_on: 2
+      crossing: 3
+      overtaking: 4
+      boundary_constrained: 5
+      bridge_constrained: 6
+      none: 7
+
+  active_rule:
+    vocabulary_size: 12
+    mapping:
+      Rule5: 2
+      Rule7: 3
+      Rule8: 4
+      Rule13: 5
+      Rule14: 6
+      Rule15: 7
+      Rule16: 8
+      Rule17: 9
+      Local-Channel: 10
+      Local-Bridge: 11
+
+  own_role:
+    vocabulary_size: 8
+    mapping:
+      give_way: 2
+      stand_on: 3
+      overtaking_vessel: 4
+      overtaken_vessel: 5
+      keep_channel: 6
+      unconstrained: 7
+
+  compliance_state:
+    vocabulary_size: 5
+    mapping:
+      compliant: 2
+      warning: 3
+      violation: 4
+
+  violation_action:
+    vocabulary_size: 12
+    mapping:
+      none: 2
+      late_turn: 3
+      no_give_way: 4
+      improper_crossing: 5
+      improper_overtaking: 6
+      no_speed_adjustment: 7
+      excessive_speed: 8
+      insufficient_speed: 9
+      channel_deviation: 10
+      improper_bridge_approach: 11
+
+model:
+  latent_dimension: 512
+
+  temporal_encoder:
+    architecture: transformer_encoder
+    input_dimension: 4
+    input_projection_dimension: 512
+    number_of_layers: 2
+    number_of_attention_heads: 8
+    attention_head_dimension: 64
+    feedforward_dimension: 2048
+    activation: gelu
+    dropout: 0.1
+
+    positional_encoding:
+      type: fixed_sinusoidal
+      maximum_sequence_length: 40
+
+    normalization:
+      type: pre_layer_norm
+      layer_norm_epsilon: 1.0e-5
+
+  rule_encoder:
+    number_of_rule_fields: 5
+    fields:
+      - encounter_type
+      - active_rule
+      - own_role
+      - compliance_state
+      - violation_action
+
+    embedding_dimension_per_field: 16
+    concatenated_embedding_dimension: 80
+    output_projection_dimension: 512
+
+    positional_encoding:
+      type: fixed_sinusoidal
+      maximum_sequence_length: 40
+      applied_after_output_projection: true
+
+    activation: gelu
+    dropout: 0.1
+
+    normalization:
+      type: layer_norm
+      layer_norm_epsilon: 1.0e-5
+
+  cross_fusion:
+    architecture: temporally_aligned_sequence_level_cross_attention
+    number_of_layers: 1
+    query_source: temporal_feature_sequence
+    key_source: rule_feature_sequence
+    value_source: rule_feature_sequence
+    attention_scope: complete_historical_rule_sequence
+    temporal_alignment: true
+    causal_mask: false
+    future_horizon_information_used: false
+
+    latent_dimension: 512
+    number_of_attention_heads: 8
+    attention_head_dimension: 64
+    feedforward_dimension: 2048
+    activation: gelu
+    dropout: 0.1
+
+    normalization:
+      type: pre_layer_norm
+      layer_norm_epsilon: 1.0e-5
+
+  trajectory_decoder:
+    input_source: last_fused_time_step
+    sequence_summary_method: last_observed_time_step
+    input_dimension: 512
+    hidden_layers:
+      - 256
+    activation: gelu
+    dropout: 0.1
+    output_dimension: 40
+    output_shape:
+      - 20
+      - 2
+    output_variables:
+      - longitude
+      - latitude
+    output_activation: none
+
+  risk_decoder:
+    input_source: last_fused_time_step
+    sequence_summary_method: last_observed_time_step
+    input_dimension: 512
+    hidden_layers:
+      - 128
+    activation: gelu
+    dropout: 0.1
+    output_dimension: 20
+    output_shape:
+      - 20
+      - 1
+    output_variable: CRI
+    output_activation: sigmoid
+
+training:
+  optimizer:
+    type: adam
+    initial_learning_rate: 1.0e-4
+    weight_decay: 1.0e-5
+
+  learning_rate_schedule:
+    type: cosine_annealing
+    t_max: 200
+    eta_min: 1.0e-6
+    warmup_epochs: 0
+
+  batch_size: 32
+  gradient_clip_norm: 1.0
+
+  training_stages:
+    uav_tsd_pretraining:
+      epochs: 50
+      loss_weights:
+        center_refinement: 1.0
+        trajectory_prediction: 0.0
+        risk_prediction: 0.0
+      checkpoint_selection:
+        monitor: validation_center_refinement_loss
+        mode: minimum
+        evaluation_frequency: every_epoch
+
+    joint_prediction_training:
+      epochs: 200
+      loss_weights:
+        center_refinement: 0.5
+        trajectory_prediction: 1.0
+        risk_prediction: 0.5
+      frozen_modules:
+        - qwen3_rule_reasoning_model
+      checkpoint_selection:
+        monitor: validation_total_loss
+        mode: minimum
+        evaluation_frequency: every_epoch
+        selected_checkpoint: lowest_validation_total_loss
+
+  early_stopping:
+    enabled: false
+    reason: fixed_epoch_training_reported_in_manuscript
+
+reproducibility:
+  control_python_random_state: true
+  control_numpy_random_state: true
+  control_pytorch_cpu_random_state: true
+  control_pytorch_cuda_random_state: true
+  control_dataloader_random_state: true
+  cudnn_deterministic: true
+  cudnn_benchmark: false
+  deterministic_seed_control: true
+  bitwise_determinism_guaranteed: false
+
+parameter_reporting:
+  counting_script: scripts/count_parameters.py
+  prediction_network_scope:
+    include:
+      - temporal_encoder
+      - rule_encoder
+      - cross_fusion
+      - trajectory_decoder
+      - risk_decoder
+    exclude:
+      - frozen_qwen3
+      - yolov10_detector
+      - separately_trained_visual_perception_modules
+  prediction_network_trainable_parameter_count: null
+  prediction_network_total_parameter_count: null

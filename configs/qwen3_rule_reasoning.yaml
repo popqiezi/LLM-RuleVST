@@ -1,0 +1,67 @@
+llm_rule_reasoning:
+  model:
+    model_id: Qwen/Qwen3-4B
+    model_family: Qwen3
+    architecture: dense_decoder_only
+    total_parameters: 4.0B
+    numerical_precision: bfloat16
+    quantization: none
+    device: cuda:0
+
+    native_context_length: 32768
+    configured_max_context_length: 8192
+    max_new_tokens: 128
+
+    reasoning_mode: non_thinking
+    enable_thinking: false
+
+  decoding:
+    method: greedy
+    do_sample: false
+    temperature: null
+    top_p: null
+    top_k: null
+    sampling_parameters_active: false
+    repetition_penalty: 1.0
+    num_beams: 1
+    random_seed: 22
+    batch_size: 1
+
+  output:
+    format: strict_json
+    required_fields:
+      - encounter_type
+      - active_rule
+      - own_role
+      - compliance_state
+      - violation_action
+    closed_vocabulary: true
+    allow_free_text: false
+
+  output_validation:
+    check_json_parseability: true
+    check_required_fields: true
+    check_extra_fields: true
+    check_closed_vocabulary: true
+    check_candidate_rule_consistency: true
+    maximum_repair_attempts: 1
+    repair_method: constrained_regeneration
+    failure_action: map_invalid_field_to_UNK
+    manual_correction: false
+
+  inference_environment:
+    operating_system: Ubuntu 22.04.5 LTS
+    python: 3.10.18
+    pytorch: 2.6.0
+    transformers: 4.51.3
+    cuda: 12.7
+    gpu: NVIDIA GeForce RTX 4090
+    gpu_vram: 24 GB
+
+  resources:
+    xml_rule_base: rule_reasoning/rules/full_rule_base.xml
+    system_prompt: rule_reasoning/prompts/system_prompt.txt
+    user_prompt_template: rule_reasoning/prompts/user_prompt_template.txt
+    repair_prompt_template: rule_reasoning/prompts/repair_prompt_template.txt
+    vocabulary: rule_reasoning/vocab/rule_feature_vocab.json
+    example_directory: rule_reasoning/examples

@@ -1,0 +1,19 @@
+{
+  "note": "Replace null values with statistics computed from the training split only.",
+  "longitude": {
+    "mean": null,
+    "std": null
+  },
+  "latitude": {
+    "mean": null,
+    "std": null
+  },
+  "sog": {
+    "mean": null,
+    "std": null
+  },
+  "cog": {
+    "mean": null,
+    "std": null
+  }
+}
