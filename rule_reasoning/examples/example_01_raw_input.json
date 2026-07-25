@@ -1,0 +1,85 @@
+{
+  "case_id": "head_on_0001",
+  "time_step": 39,
+  "waterway_type": "open_inland_channel",
+  "own_ship": {
+    "ship_id": "OS_001",
+    "ship_type": "cargo",
+    "length_m": 82.0
+  },
+  "target_ship": {
+    "ship_id": "TS_014",
+    "ship_type": "cargo",
+    "length_m": 76.0
+  },
+  "historical_state_window": [
+    {
+      "time_index": 35,
+      "own_lon": 119.3815201,
+      "own_lat": 32.2239702,
+      "own_sog_kn": 6.8,
+      "own_cog_deg": 90.4,
+      "target_lon": 119.3855314,
+      "target_lat": 32.2239811,
+      "target_sog_kn": 5.4,
+      "target_cog_deg": 269.6
+    },
+    {
+      "time_index": 36,
+      "own_lon": 119.381628,
+      "own_lat": 32.2239704,
+      "own_sog_kn": 6.8,
+      "own_cog_deg": 90.1,
+      "target_lon": 119.3854231,
+      "target_lat": 32.2239809,
+      "target_sog_kn": 5.4,
+      "target_cog_deg": 269.8
+    },
+    {
+      "time_index": 37,
+      "own_lon": 119.3817362,
+      "own_lat": 32.2239705,
+      "own_sog_kn": 6.9,
+      "own_cog_deg": 89.9,
+      "target_lon": 119.3853147,
+      "target_lat": 32.2239806,
+      "target_sog_kn": 5.4,
+      "target_cog_deg": 270.1
+    },
+    {
+      "time_index": 38,
+      "own_lon": 119.3818443,
+      "own_lat": 32.2239706,
+      "own_sog_kn": 6.8,
+      "own_cog_deg": 90.0,
+      "target_lon": 119.3852065,
+      "target_lat": 32.2239804,
+      "target_sog_kn": 5.3,
+      "target_cog_deg": 270.0
+    },
+    {
+      "time_index": 39,
+      "own_lon": 119.3819525,
+      "own_lat": 32.2239708,
+      "own_sog_kn": 6.8,
+      "own_cog_deg": 90.2,
+      "target_lon": 119.3850981,
+      "target_lat": 32.2239801,
+      "target_sog_kn": 5.4,
+      "target_cog_deg": 269.9
+    }
+  ],
+  "relative_navigation_state": {
+    "range_m": 296.4,
+    "relative_bearing_deg": 1.3,
+    "relative_course_difference_deg": 179.7,
+    "relative_speed_mps": 6.28,
+    "DCPA_m": 18.6,
+    "TCPA_s": 74.2
+  },
+  "retrieved_candidate_rules": [
+    "Rule7",
+    "Rule8",
+    "Rule14"
+  ]
+}

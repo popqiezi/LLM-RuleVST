@@ -1,0 +1,8 @@
+The vessels appear to be in a head-on situation. Rule 14 applies.
+
+{
+  "encounter": "head-on",
+  "rule": "COLREG Rule 14",
+  "role": "both should turn",
+  "status": "potentially unsafe"
+}

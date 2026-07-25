@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inland_waterway_rule_base
+    version="1.0"
+    region="Jiangsu section of the Yangtze River"
+    language="English">
+
+  <metadata>
+    <description>
+      Operational XML representation used by the LLM-RuleVST reasoning pipeline.
+      The content is a research abstraction and not a substitute for official legal text.
+    </description>
+    <covered_rules>
+      <rule_id>Rule5</rule_id>
+      <rule_id>Rule7</rule_id>
+      <rule_id>Rule8</rule_id>
+      <rule_id>Rule13</rule_id>
+      <rule_id>Rule14</rule_id>
+      <rule_id>Rule15</rule_id>
+      <rule_id>Rule16</rule_id>
+      <rule_id>Rule17</rule_id>
+      <rule_id>Local-Channel</rule_id>
+      <rule_id>Local-Bridge</rule_id>
+    </covered_rules>
+  </metadata>
+
+  <encounter id="general">
+    <rule id="Rule5">
+      <premise>Continuous visual, auditory, and available-sensor lookout is required.</premise>
+      <required_action>Maintain sufficient situational awareness to detect encounter development.</required_action>
+      <compliance_cues>
+        <cue>Stable observation and timely response to developing traffic.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="warning">A developing encounter is observable but no response is yet evident.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>historical_relative_state</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>lookout</tag>
+        <tag>traffic awareness</tag>
+      </retrieval_tags>
+    </rule>
+
+    <rule id="Rule7">
+      <premise>Available relative-motion information indicates whether collision risk exists.</premise>
+      <required_action>Evaluate relative bearing, range, DCPA, and TCPA without using future observations.</required_action>
+      <compliance_cues>
+        <cue>Risk assessment is updated as the encounter develops.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="warning">Risk indicators deteriorate without an observable response.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>range_m</parameter>
+        <parameter>relative_bearing_deg</parameter>
+        <parameter>DCPA_m</parameter>
+        <parameter>TCPA_s</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>collision risk</tag>
+        <tag>DCPA</tag>
+        <tag>TCPA</tag>
+      </retrieval_tags>
+    </rule>
+
+    <rule id="Rule8">
+      <premise>Collision-avoidance action is required after risk has been identified.</premise>
+      <required_action>Take an observable and timely maneuver appropriate to the encounter.</required_action>
+      <compliance_cues>
+        <cue>A clear course or speed adjustment occurs before the risk becomes critical.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="late_turn">Required course alteration is delayed.</condition>
+        <condition label="no_speed_adjustment">Required speed adjustment is absent.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>course_change</parameter>
+        <parameter>speed_change</parameter>
+        <parameter>DCPA_m</parameter>
+        <parameter>TCPA_s</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>avoidance action</tag>
+        <tag>timely maneuver</tag>
+      </retrieval_tags>
+    </rule>
+  </encounter>
+
+  <encounter id="overtaking">
+    <rule id="Rule13">
+      <premise>One vessel approaches another from an overtaking sector with closing motion.</premise>
+      <required_action>The overtaking vessel keeps clear of the overtaken vessel.</required_action>
+      <compliance_cues>
+        <cue>The overtaking vessel maintains sufficient lateral clearance and controlled relative speed.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="improper_overtaking">The maneuver produces insufficient passing clearance or an unsafe relative path.</condition>
+        <condition label="excessive_speed">Relative overtaking speed is inconsistent with safe passage.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>relative_bearing_deg</parameter>
+        <parameter>relative_speed_mps</parameter>
+        <parameter>DCPA_m</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>overtaking</tag>
+        <tag>astern sector</tag>
+      </retrieval_tags>
+    </rule>
+  </encounter>
+
+  <encounter id="head_on">
+    <rule id="Rule14">
+      <premise>Two power-driven vessels approach on reciprocal or approximately reciprocal courses.</premise>
+      <required_action>Each vessel makes an observable starboard-side avoidance maneuver when required.</required_action>
+      <compliance_cues>
+        <cue>Course alteration increases passing clearance.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="late_turn">Required alteration is delayed while risk continues to increase.</condition>
+        <condition label="no_give_way">No observable avoidance action occurs.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>relative_course_difference_deg</parameter>
+        <parameter>relative_bearing_deg</parameter>
+        <parameter>DCPA_m</parameter>
+        <parameter>TCPA_s</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>head-on</tag>
+        <tag>reciprocal course</tag>
+      </retrieval_tags>
+    </rule>
+  </encounter>
+
+  <encounter id="crossing">
+    <rule id="Rule15">
+      <premise>Two power-driven vessels cross with collision risk.</premise>
+      <required_action>Assign give-way and stand-on roles from the relative geometry.</required_action>
+      <compliance_cues>
+        <cue>The give-way vessel makes an observable maneuver and avoids crossing ahead.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="improper_crossing">The give-way maneuver is inconsistent with the required passing relationship.</condition>
+        <condition label="no_give_way">The give-way vessel does not take an observable avoiding action.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>relative_bearing_deg</parameter>
+        <parameter>relative_course_difference_deg</parameter>
+        <parameter>DCPA_m</parameter>
+        <parameter>TCPA_s</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>crossing</tag>
+        <tag>give-way</tag>
+        <tag>stand-on</tag>
+      </retrieval_tags>
+    </rule>
+
+    <rule id="Rule16">
+      <premise>The own ship is assigned the give-way role.</premise>
+      <required_action>Take early and observable action to keep clear.</required_action>
+      <compliance_cues>
+        <cue>A course or speed change increases separation.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="no_give_way">No sufficient avoidance action is observed.</condition>
+        <condition label="late_turn">Avoidance action occurs too late in the observed causal window.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>own_role</parameter>
+        <parameter>course_change</parameter>
+        <parameter>speed_change</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>give-way vessel</tag>
+      </retrieval_tags>
+    </rule>
+
+    <rule id="Rule17">
+      <premise>The own ship is assigned the stand-on role.</premise>
+      <required_action>Maintain a predictable course and speed unless intervention becomes necessary.</required_action>
+      <compliance_cues>
+        <cue>Course and speed remain stable while monitoring the give-way vessel.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="improper_crossing">An unnecessary or conflicting maneuver reduces predictability.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>own_role</parameter>
+        <parameter>course_change</parameter>
+        <parameter>speed_change</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>stand-on vessel</tag>
+      </retrieval_tags>
+    </rule>
+  </encounter>
+
+  <encounter id="boundary_constrained">
+    <rule id="Local-Channel">
+      <premise>The vessel operates in a constrained inland channel or near a navigable boundary.</premise>
+      <required_action>Remain within the applicable channel corridor and avoid unsafe lateral deviation.</required_action>
+      <compliance_cues>
+        <cue>The vessel maintains a stable path inside the permitted navigation corridor.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="channel_deviation">The observed path departs from the permitted corridor or conflicts with channel use.</condition>
+        <condition label="excessive_speed">Speed is inconsistent with the constrained channel condition.</condition>
+        <condition label="insufficient_speed">Speed is insufficient to maintain safe and controllable navigation.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>distance_to_channel_boundary</parameter>
+        <parameter>sog</parameter>
+        <parameter>cog</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>channel constraint</tag>
+        <tag>boundary</tag>
+        <tag>local navigation</tag>
+      </retrieval_tags>
+    </rule>
+  </encounter>
+
+  <encounter id="bridge_constrained">
+    <rule id="Local-Bridge">
+      <premise>The vessel approaches or passes through a bridge navigation area.</premise>
+      <required_action>Use an appropriate bridge approach path, speed, and alignment.</required_action>
+      <compliance_cues>
+        <cue>The vessel aligns with the intended opening and maintains a controlled approach.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="improper_bridge_approach">Approach alignment or maneuvering is inconsistent with safe bridge passage.</condition>
+        <condition label="excessive_speed">Approach speed is excessive for the bridge area.</condition>
+        <condition label="insufficient_speed">Approach speed is insufficient for stable control.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>distance_to_bridge</parameter>
+        <parameter>bridge_alignment_error</parameter>
+        <parameter>sog</parameter>
+        <parameter>cog</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>bridge area</tag>
+        <tag>bridge approach</tag>
+        <tag>local navigation</tag>
+      </retrieval_tags>
+    </rule>
+  </encounter>
+
+  <encounter id="none">
+    <rule id="Rule5">
+      <premise>No specific encounter rule is currently dominant.</premise>
+      <required_action>Maintain lookout and continue monitoring.</required_action>
+      <compliance_cues>
+        <cue>Stable navigation without developing conflict.</cue>
+      </compliance_cues>
+      <violation_conditions>
+        <condition label="none">No observable violation action.</condition>
+      </violation_conditions>
+      <parameters>
+        <parameter>historical_relative_state</parameter>
+      </parameters>
+      <retrieval_tags>
+        <tag>none</tag>
+        <tag>unconstrained</tag>
+      </retrieval_tags>
+    </rule>
+  </encounter>
+</inland_waterway_rule_base>

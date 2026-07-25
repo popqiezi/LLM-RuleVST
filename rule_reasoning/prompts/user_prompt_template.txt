@@ -1,0 +1,59 @@
+Task:
+Determine the current encounter type, primary applicable rule, own-ship role,
+compliance state, and observable violation action.
+
+Retrieved XML rule fragments:
+{retrieved_xml_rules}
+
+Static parameters:
+{
+  "waterway_type": "{waterway_type}",
+  "own_ship_id": "{own_ship_id}",
+  "own_ship_type": "{own_ship_type}",
+  "own_ship_length_m": {own_ship_length_m},
+  "target_ship_id": "{target_ship_id}",
+  "target_ship_type": "{target_ship_type}",
+  "target_ship_length_m": {target_ship_length_m}
+}
+
+Causally available observation window ending at time step t:
+{historical_state_window}
+
+Current relative-navigation parameters:
+{
+  "range_m": {range_m},
+  "relative_bearing_deg": {relative_bearing_deg},
+  "relative_course_difference_deg": {relative_course_difference_deg},
+  "relative_speed_mps": {relative_speed_mps},
+  "DCPA_m": {dcpa_m},
+  "TCPA_s": {tcpa_s}
+}
+
+Allowed output values:
+
+encounter_type:
+["head_on", "crossing", "overtaking", "boundary_constrained",
+ "bridge_constrained", "none"]
+
+active_rule:
+["Rule5", "Rule7", "Rule8", "Rule13", "Rule14", "Rule15",
+ "Rule16", "Rule17", "Local-Channel", "Local-Bridge"]
+
+own_role:
+["give_way", "stand_on", "overtaking_vessel", "overtaken_vessel",
+ "keep_channel", "unconstrained"]
+
+compliance_state:
+["compliant", "warning", "violation"]
+
+violation_action:
+["none", "late_turn", "no_give_way", "improper_crossing",
+ "improper_overtaking", "no_speed_adjustment", "excessive_speed",
+ "insufficient_speed", "channel_deviation", "improper_bridge_approach"]
+
+Output requirements:
+1. Return exactly the five required keys.
+2. Select one allowed value for each key.
+3. active_rule must occur in the retrieved candidate-rule set.
+4. Use only information available at or before time step t.
+5. Return JSON only.

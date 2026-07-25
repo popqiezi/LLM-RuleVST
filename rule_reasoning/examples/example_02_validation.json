@@ -1,0 +1,12 @@
+{
+  "case_id": "head_on_0002",
+  "initial_output_valid": false,
+  "error_codes": [
+    "E01_JSON_PARSE_ERROR",
+    "E02_MISSING_FIELD",
+    "E04_INVALID_LABEL",
+    "E06_FREE_TEXT_DETECTED"
+  ],
+  "repair_attempted": true,
+  "manual_correction": false
+}

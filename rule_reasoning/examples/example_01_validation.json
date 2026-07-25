@@ -1,0 +1,9 @@
+{
+  "case_id": "head_on_0001",
+  "initial_output_valid": true,
+  "error_codes": [],
+  "repair_attempted": false,
+  "repair_successful": false,
+  "manual_correction": false,
+  "final_status": "accepted"
+}

@@ -1,0 +1,20 @@
+{
+  "case_id": "head_on_0001",
+  "time_step": 39,
+  "categorical_rule_features": {
+    "encounter_type_id": 2,
+    "active_rule_id": 6,
+    "own_role_id": 2,
+    "compliance_state_id": 3,
+    "violation_action_id": 3
+  },
+  "feature_vector": [
+    2,
+    6,
+    2,
+    3,
+    3
+  ],
+  "validation_status": "accepted",
+  "repair_applied": false
+}

@@ -1,0 +1,21 @@
+The preceding output failed schema validation.
+
+Validation errors:
+{validation_errors}
+
+Invalid output:
+{invalid_output}
+
+Correct the output using the original scenario and retrieved XML rules.
+
+Requirements:
+1. Return exactly one valid JSON object.
+2. Use exactly these keys:
+   encounter_type,
+   active_rule,
+   own_role,
+   compliance_state,
+   violation_action.
+3. Select every value from the predefined closed vocabulary.
+4. active_rule must belong to the retrieved candidate-rule set.
+5. Do not add explanations, markdown, comments, or additional keys.

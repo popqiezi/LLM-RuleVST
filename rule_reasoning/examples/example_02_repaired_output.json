@@ -1,0 +1,7 @@
+{
+  "encounter_type": "head_on",
+  "active_rule": "Rule14",
+  "own_role": "give_way",
+  "compliance_state": "warning",
+  "violation_action": "late_turn"
+}
