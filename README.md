@@ -4,7 +4,7 @@
 
 This repository is for the paper:
 
-**LLM-RuleVST: A Rule-Guided Visual-Sequence Transformer Framework for UAV-Based Vessel Trajectory and Risk Prediction in Inland Waterways**
+**LLM-RuleVST: Rule-Guided Vessel Trajectory and Collision-Risk Prediction in Inland Waterways Using UAV Imagery**
 
 The codebase is currently being organized and improved. 
 
