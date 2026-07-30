@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "encounter_type",
+    "active_rule",
+    "own_role",
+    "compliance_state",
+    "violation_action"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "encounter_type": {
+      "type": "string"
+    },
+    "active_rule": {
+      "type": "string"
+    },
+    "own_role": {
+      "type": "string"
+    },
+    "compliance_state": {
+      "type": "string"
+    },
+    "violation_action": {
+      "type": "string"
+    }
+  }
+}

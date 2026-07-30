@@ -1,0 +1,39 @@
+TrAISformer:
+  implementation: external_repository
+  adaptation:
+    historical_length: 40
+    prediction_horizon: 20
+    data_partitions: identical
+    preprocessing: identical_within_dataset
+
+MSTFormer:
+  implementation: external_repository
+  adaptation:
+    historical_length: 40
+    prediction_horizon: 20
+    data_partitions: identical
+    preprocessing: identical_within_dataset
+
+Informer:
+  implementation: external_repository
+  adaptation:
+    historical_length: 40
+    prediction_horizon: 20
+    data_partitions: identical
+    preprocessing: identical_within_dataset
+
+FlashAttentionTransformer:
+  implementation: external_repository
+  adaptation:
+    historical_length: 40
+    prediction_horizon: 20
+    data_partitions: identical
+    preprocessing: identical_within_dataset
+
+Flowformer:
+  implementation: external_repository
+  adaptation:
+    historical_length: 40
+    prediction_horizon: 20
+    data_partitions: identical
+    preprocessing: identical_within_dataset

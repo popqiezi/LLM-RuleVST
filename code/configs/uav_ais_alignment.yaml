@@ -1,0 +1,17 @@
+coordinate_system:
+  geographic_crs: EPSG:4326
+  metric_crs: EPSG:32650
+
+alignment:
+  maximum_time_difference_seconds: 120.0
+  maximum_distance_m: 1000.0
+  maximum_interpolation_gap_seconds: 120.0
+  methods:
+    - exact
+    - interpolated
+    - nearest
+  allow_extrapolation: false
+
+trend_filter:
+  enabled: true
+  maximum_course_difference_deg: 45.0

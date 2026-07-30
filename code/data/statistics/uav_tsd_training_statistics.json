@@ -1,0 +1,25 @@
+{
+  "dataset": "UAV-TSD",
+  "method": "z_score",
+  "statistics_source": "UAV-TSD training set only",
+  "ddof": 0,
+  "feature_order": [
+    "lon",
+    "lat",
+    "sog",
+    "cog"
+  ],
+  "number_of_training_time_steps": 60,
+  "mean": {
+    "lon": 119.38375963736411,
+    "lat": 32.22693139719057,
+    "sog": 10.801879350243354,
+    "cog": 270.099447286479
+  },
+  "std": {
+    "lon": 0.0020448299904322355,
+    "lat": 5.566645439857485e-06,
+    "sog": 0.06006268807917754,
+    "cog": 0.2321675267981634
+  }
+}

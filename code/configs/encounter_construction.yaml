@@ -1,0 +1,31 @@
+coordinate_system:
+  geographic_crs: EPSG:4326
+  metric_crs: EPSG:32650
+
+sequence:
+  historical_length: 40
+  prediction_horizon: 20
+  total_length: 60
+
+pairing:
+  maximum_distance_m: 1000.0
+  distance_evaluation_index: 39
+  ordered_pairs: true
+  allow_cross_split_pairs: false
+  allow_same_trajectory_pair: false
+  remove_duplicate_pairs: true
+
+ais_alignment:
+  method: linear_interpolation_utm
+  maximum_bracketing_gap_seconds: 30.0
+  allow_extrapolation: false
+
+uav_tsd_alignment:
+  method: exact_common_timestamps
+  require_same_source_file: true
+  timestamp_tolerance_seconds: 0.0
+
+storage:
+  save_encounter_npz: true
+  manifest_name: encounter_pair_manifest.csv
+  encounter_subdirectory: encounter_files

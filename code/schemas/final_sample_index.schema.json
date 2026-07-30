@@ -1,0 +1,13 @@
+{
+  "required_columns": [
+    "sample_id",
+    "dataset",
+    "split",
+    "encounter_id",
+    "sample_file",
+    "motion_shape",
+    "rule_shape",
+    "trajectory_target_shape",
+    "cri_target_shape"
+  ]
+}

@@ -1,0 +1,13 @@
+coordinate_system:
+  geographic_crs: EPSG:4326
+  metric_crs: EPSG:32650
+
+correction:
+  window_size: 5
+  mad_multiplier: 3.0
+  replace_only_isolated_points: true
+  minimum_points: 5
+
+motion:
+  speed_unit: knot
+  cog_range: [0.0, 360.0]

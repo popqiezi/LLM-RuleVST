@@ -1,0 +1,6 @@
+name: arpa_cpa
+deterministic: true
+motion_assumption: constant_velocity
+historical_state_source: final_observed_state
+prediction_horizon: 20
+cri_parameter_file: configs/cri_parameters.yaml

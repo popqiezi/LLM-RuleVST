@@ -1,0 +1,16 @@
+{
+  "required_columns": [
+    "dataset",
+    "split",
+    "encounter_id",
+    "own_trajectory_id",
+    "target_trajectory_id",
+    "own_window_id",
+    "alignment_method",
+    "final_history_distance_m",
+    "encounter_file"
+  ],
+  "ordered_pair": true,
+  "historical_length": 40,
+  "prediction_horizon": 20
+}

@@ -1,0 +1,22 @@
+{
+  "trajectory": {
+    "ADE_m": 42.75,
+    "FDE_m": 55.31
+  },
+  "cri_regression": {
+    "MAE": 0.214,
+    "MSE": 0.093
+  },
+  "high_risk_classification": {
+    "Precision": 0.9,
+    "Recall": 0.93,
+    "F1": 0.9148,
+    "TN": 12,
+    "FP": 1,
+    "FN": 1,
+    "TP": 13,
+    "high_risk_count": 14,
+    "non_high_risk_count": 13
+  },
+  "purpose": "pipeline_verification"
+}

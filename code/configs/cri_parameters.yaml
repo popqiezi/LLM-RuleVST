@@ -1,0 +1,15 @@
+coordinate_system:
+  metric_crs: EPSG:32650
+
+cri:
+  d1_m: 100.0
+  d2_m: 900.0
+  w1_temporal: 0.1
+  w2_spatial: 0.9
+  reference_time_s: 1.0
+  high_risk_threshold: 0.87
+  minimum_relative_speed_mps: 1.0e-6
+  minimum_tangent_magnitude: 1.0e-6
+  exponent_minimum: -60.0
+  exponent_maximum: 0.0
+  clip_risk_factors_to_unit_interval: true

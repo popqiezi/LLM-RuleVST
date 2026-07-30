@@ -1,0 +1,40 @@
+sequence:
+  historical_length: 40
+  short_history_length: 5
+
+coordinate_system:
+  metric_crs: EPSG:32650
+
+candidate_rule_retrieval:
+  general_rules:
+    - Rule5
+    - Rule7
+    - Rule8
+  encounter_rules:
+    head_on:
+      - Rule14
+    crossing:
+      - Rule15
+      - Rule16
+      - Rule17
+    overtaking:
+      - Rule13
+    boundary_constrained:
+      - Local-Channel
+    bridge_constrained:
+      - Local-Bridge
+    none:
+      - Rule5
+
+coarse_geometry:
+  head_on_min_course_difference_deg: 165.0
+  head_on_max_relative_bearing_deg: 15.0
+  overtaking_max_course_difference_deg: 30.0
+  overtaking_max_forward_bearing_deg: 67.5
+  crossing_min_course_difference_deg: 30.0
+  crossing_max_course_difference_deg: 165.0
+
+metadata:
+  vessel_metadata_csv: null
+  local_context_csv: null
+  default_waterway_type: inland_waterway

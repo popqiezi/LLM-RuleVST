@@ -1,0 +1,24 @@
+trajectory_comparison:
+  seeds: [17, 29, 43, 71, 97]
+  number_of_runs: 5
+
+collision_risk_comparison:
+  seed: 43
+  number_of_runs: 1
+
+ablation_study:
+  seed: 43
+  number_of_runs: 1
+
+training:
+  epochs: 200
+  batch_size: 32
+  optimizer: adam
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-5
+  gradient_clip_norm: 1.0
+  trajectory_loss_weight: 1.0
+  cri_loss_weight: 0.5
+  checkpoint_monitor: validation_total_loss
+  checkpoint_mode: min
+  early_stopping: false

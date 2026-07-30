@@ -1,0 +1,51 @@
+{
+  "special_tokens": {
+    "PAD": 0,
+    "UNK": 1
+  },
+  "encounter_type": {
+    "head_on": 2,
+    "crossing": 3,
+    "overtaking": 4,
+    "boundary_constrained": 5,
+    "bridge_constrained": 6,
+    "none": 7
+  },
+  "active_rule": {
+    "Rule5": 2,
+    "Rule7": 3,
+    "Rule8": 4,
+    "Rule13": 5,
+    "Rule14": 6,
+    "Rule15": 7,
+    "Rule16": 8,
+    "Rule17": 9,
+    "Local-Channel": 10,
+    "Local-Bridge": 11
+  },
+  "own_role": {
+    "give_way": 2,
+    "stand_on": 3,
+    "overtaking_vessel": 4,
+    "overtaken_vessel": 5,
+    "keep_channel": 6,
+    "unconstrained": 7
+  },
+  "compliance_state": {
+    "compliant": 2,
+    "warning": 3,
+    "violation": 4
+  },
+  "violation_action": {
+    "none": 2,
+    "late_turn": 3,
+    "no_give_way": 4,
+    "improper_crossing": 5,
+    "improper_overtaking": 6,
+    "no_speed_adjustment": 7,
+    "excessive_speed": 8,
+    "insufficient_speed": 9,
+    "channel_deviation": 10,
+    "improper_bridge_approach": 11
+  }
+}

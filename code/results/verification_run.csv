@@ -1,0 +1,2 @@
+dataset,model,seed,ADE_m,FDE_m,checkpoint,purpose
+AIS,LSTM,43,42.75,55.31,checkpoints/verification/lstm_verification_checkpoint.pt,pipeline_verification

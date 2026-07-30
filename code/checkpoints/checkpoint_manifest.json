@@ -1,0 +1,15 @@
+{
+  "checkpoints": [
+    {
+      "file": "verification/lstm_verification_checkpoint.pt",
+      "model_name": "lstm",
+      "dataset": "AIS",
+      "seed": 43,
+      "epoch": 1,
+      "validation_total_loss": 0.125,
+      "purpose": "pipeline_verification",
+      "size_bytes": 228665,
+      "sha256": "65adb88c996d36bad989bb10e69c346f28e90b1200e84e920b6cfe7d3fa2a614"
+    }
+  ]
+}

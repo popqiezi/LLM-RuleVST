@@ -1,0 +1,11 @@
+{
+  "required_columns": [
+    "entity_id"
+  ],
+  "optional_columns": [
+    "ship_type",
+    "length_m",
+    "width_m",
+    "waterway_type"
+  ]
+}

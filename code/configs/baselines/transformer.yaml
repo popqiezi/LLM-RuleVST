@@ -1,0 +1,11 @@
+name: transformer
+input_dimension: 4
+latent_dimension: 512
+number_of_layers: 2
+number_of_attention_heads: 8
+feedforward_dimension: 2048
+dropout: 0.1
+historical_length: 40
+prediction_horizon: 20
+trajectory_output_dimension: 2
+cri_output_dimension: 1

@@ -1,0 +1,7 @@
+dataset,split,encounter_id,rule_sequence_file,sequence_length,number_of_fields,missing_or_invalid_steps,repair_count
+AIS,train,ENC_AIS_TRAIN_HEADON_0001,sequence_files/train/ENC_AIS_TRAIN_HEADON_0001.npz,40,5,0,0
+AIS,validation,ENC_AIS_VALID_CROSSING_0001,sequence_files/validation/ENC_AIS_VALID_CROSSING_0001.npz,40,5,0,0
+AIS,test,ENC_AIS_TEST_OVERTAKING_0001,sequence_files/test/ENC_AIS_TEST_OVERTAKING_0001.npz,40,5,0,0
+UAV-TSD,train,ENC_UAV_TRAIN_HEADON_0001,sequence_files/train/ENC_UAV_TRAIN_HEADON_0001.npz,40,5,0,0
+UAV-TSD,validation,ENC_UAV_VALID_CROSSING_0001,sequence_files/validation/ENC_UAV_VALID_CROSSING_0001.npz,40,5,0,0
+UAV-TSD,test,ENC_UAV_TEST_OVERTAKING_0001,sequence_files/test/ENC_UAV_TEST_OVERTAKING_0001.npz,40,5,0,0

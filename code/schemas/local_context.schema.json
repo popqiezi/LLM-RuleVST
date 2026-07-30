@@ -1,0 +1,11 @@
+{
+  "required_columns": [
+    "encounter_id",
+    "time_index",
+    "context_label"
+  ],
+  "allowed_context_label": [
+    "boundary_constrained",
+    "bridge_constrained"
+  ]
+}

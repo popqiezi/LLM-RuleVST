@@ -1,0 +1,25 @@
+{
+  "dataset": "AIS",
+  "method": "z_score",
+  "statistics_source": "AIS training set only",
+  "ddof": 0,
+  "feature_order": [
+    "lon",
+    "lat",
+    "sog",
+    "cog"
+  ],
+  "number_of_training_time_steps": 60,
+  "mean": {
+    "lon": 119.59627612616282,
+    "lat": 31.98458219883635,
+    "sog": 8.401879350243352,
+    "cog": 270.099447286479
+  },
+  "std": {
+    "lon": 0.003966264946325239,
+    "lat": 1.0841209825385265e-05,
+    "sog": 0.060062688079177536,
+    "cog": 0.2321675267981634
+  }
+}
