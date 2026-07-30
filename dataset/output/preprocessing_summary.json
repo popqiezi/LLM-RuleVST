@@ -1,0 +1,58 @@
+{
+  "eligible_trajectories": {
+    "AIS:train": 1,
+    "AIS:validation": 1,
+    "AIS:test": 1,
+    "UAV-TSD:train": 1,
+    "UAV-TSD:validation": 1,
+    "UAV-TSD:test": 1
+  },
+  "model_windows": {
+    "AIS:train": 1,
+    "AIS:validation": 1,
+    "AIS:test": 1,
+    "UAV-TSD:train": 3,
+    "UAV-TSD:validation": 2,
+    "UAV-TSD:test": 2
+  },
+  "time_steps": {
+    "AIS:train": 62,
+    "AIS:validation": 76,
+    "AIS:test": 69,
+    "UAV-TSD:train": 101,
+    "UAV-TSD:validation": 94,
+    "UAV-TSD:test": 88
+  },
+  "minimum_trajectory_length": {
+    "AIS:train": 62,
+    "AIS:validation": 76,
+    "AIS:test": 69,
+    "UAV-TSD:train": 101,
+    "UAV-TSD:validation": 94,
+    "UAV-TSD:test": 88
+  },
+  "mean_trajectory_length": {
+    "AIS:train": 62.0,
+    "AIS:validation": 76.0,
+    "AIS:test": 69.0,
+    "UAV-TSD:train": 101.0,
+    "UAV-TSD:validation": 94.0,
+    "UAV-TSD:test": 88.0
+  },
+  "maximum_trajectory_length": {
+    "AIS:train": 62,
+    "AIS:validation": 76,
+    "AIS:test": 69,
+    "UAV-TSD:train": 101,
+    "UAV-TSD:validation": 94,
+    "UAV-TSD:test": 88
+  },
+  "configuration": {
+    "minimum_length": 60,
+    "historical_length": 40,
+    "prediction_horizon": 20,
+    "stride": 20,
+    "native_sampling_retained": true,
+    "partition_before_window_generation": true
+  }
+}

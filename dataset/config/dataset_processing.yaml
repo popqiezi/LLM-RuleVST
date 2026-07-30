@@ -1,0 +1,75 @@
+paths:
+  ais_dir: input/ais
+  uav_tsd_dir: input/uav_tsd
+  output_dir: output
+
+columns:
+  ais:
+    timestamp: postTime
+    longitude: lon
+    latitude: lat
+    sog: sog
+    cog: cog
+    optional:
+      - heading
+      - rot
+  uav_tsd:
+    frame: frame
+    track_id: id
+    class_id: class_id
+    class_name: class_name
+    timestamp: postTime
+    longitude: lon
+    latitude: lat
+    sog: sog
+    cog: cog
+
+cleaning:
+  latitude_min: 31.8
+  latitude_max: 32.24
+  longitude_min: 118.8
+  longitude_max: 120.6
+  sog_min_kn: 0.0
+  sog_max_kn: 30.0
+  cog_min_deg: 0.0
+  cog_max_deg: 360.0
+
+trajectory:
+  minimum_length: 60
+  historical_length: 40
+  prediction_horizon: 20
+  stride: 20
+  ais_gap_seconds: 1800
+  uav_gap_seconds_minimum: 10
+  uav_gap_multiplier: 3.0
+
+splits:
+  ais:
+    strategy: timestamp_ranges
+    train:
+      start: "2025-07-01 00:00:00"
+      end: "2025-07-20 23:59:59"
+    validation:
+      start: "2025-07-21 00:00:00"
+      end: "2025-07-25 23:59:59"
+    test:
+      start: "2025-07-26 00:00:00"
+      end: "2025-07-31 23:59:59"
+  uav_tsd:
+    strategy: assignment_file
+    assignment_file: config/uav_split_assignments.csv
+
+normalization:
+  method: z_score
+  feature_order:
+    - lon
+    - lat
+    - sog
+    - cog
+  statistics_source: train_only
+  ddof: 0
+
+output:
+  save_processed_npz: true
+  save_cleaned_trajectory_csv: true
+  compress_window_index: true

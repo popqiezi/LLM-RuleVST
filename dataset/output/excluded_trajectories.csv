@@ -1,0 +1,3 @@
+dataset,source_file,entity_id,segment_index,num_time_steps,reason
+AIS,412345678.csv,412345678,0,22,length_below_60
+AIS,412345679.csv,412345679,1,45,length_below_60

@@ -1,0 +1,4 @@
+trajectory_id,split
+UAV_sequence_20260307_a_ID_3_SEG_000,train
+UAV_sequence_20260307_a_ID_5_SEG_000,validation
+UAV_sequence_20260308_b_ID_2_SEG_000,test

@@ -1,0 +1,7 @@
+dataset,split,trajectory_id,source_file,entity_id,segment_index,start_time,end_time,num_time_steps,median_sampling_interval_s,minimum_sampling_interval_s,maximum_sampling_interval_s,first_frame,last_frame,num_windows,minimum_required_length,historical_length,prediction_horizon,stride,split_before_window_generation,native_sampling_retained
+AIS,train,AIS_MMSI_412345679_SEG_000,412345679.csv,412345679,0,2025-07-09T07:15:00,2025-07-09T11:20:48,62,244.0,231.0,252.0,,,1,60,40,20,20,True,True
+UAV-TSD,train,UAV_sequence_20260307_a_ID_3_SEG_000,sequence_20260307_a.csv,3,0,2026-03-07T12:58:48,2026-03-07T13:02:08,101,2.0,2.0,2.0,7,107,3,60,40,20,20,True,True
+AIS,validation,AIS_MMSI_412345678_SEG_001,412345678.csv,412345678,1,2025-07-23T08:10:00,2025-07-23T14:27:15,76,304.0,291.0,312.0,,,1,60,40,20,20,True,True
+UAV-TSD,validation,UAV_sequence_20260307_a_ID_5_SEG_000,sequence_20260307_a.csv,5,0,2026-03-07T12:58:48,2026-03-07T13:01:54,94,2.0,2.0,2.0,7,100,2,60,40,20,20,True,True
+AIS,test,AIS_MMSI_412345678_SEG_002,412345678.csv,412345678,2,2025-07-28T06:30:00,2025-07-28T12:11:53,69,302.0,291.0,312.0,,,1,60,40,20,20,True,True
+UAV-TSD,test,UAV_sequence_20260308_b_ID_2_SEG_000,sequence_20260308_b.csv,2,0,2026-03-08T09:15:00,2026-03-08T09:17:54,88,2.0,2.0,2.0,1,88,2,60,40,20,20,True,True

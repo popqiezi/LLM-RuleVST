@@ -1,0 +1,38 @@
+{
+  "raw_formats": {
+    "UAV-TSD": [
+      "frame",
+      "id",
+      "class_id",
+      "class_name",
+      "postTime",
+      "lon",
+      "lat",
+      "sog",
+      "cog"
+    ],
+    "AIS": [
+      "postTime",
+      "lon",
+      "lat",
+      "sog",
+      "cog",
+      "heading",
+      "rot"
+    ]
+  },
+  "model_features": [
+    "lon",
+    "lat",
+    "sog",
+    "cog"
+  ],
+  "model_feature_units": {
+    "lon": "degree_WGS84",
+    "lat": "degree_WGS84",
+    "sog": "kn",
+    "cog": "degree"
+  },
+  "standardization": "training-set feature-wise z-score",
+  "window_indexing": "zero_based_end_exclusive"
+}

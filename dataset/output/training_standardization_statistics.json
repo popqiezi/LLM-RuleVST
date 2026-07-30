@@ -1,0 +1,24 @@
+{
+  "method": "z_score",
+  "statistics_source": "train_only",
+  "ddof": 0,
+  "feature_order": [
+    "lon",
+    "lat",
+    "sog",
+    "cog"
+  ],
+  "number_of_training_time_steps": 163,
+  "mean": {
+    "lon": 119.34330526114816,
+    "lat": 32.16961588264927,
+    "sog": 10.339324539877301,
+    "cog": 105.26251533742332
+  },
+  "std": {
+    "lon": 0.09413459783827438,
+    "lat": 0.08697114600746288,
+    "sog": 2.7682671875170723,
+    "cog": 44.332923830837835
+  }
+}

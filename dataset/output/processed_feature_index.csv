@@ -1,0 +1,7 @@
+dataset,split,trajectory_id,num_time_steps,npz_file,cleaned_csv_file,feature_order,coordinate_system,speed_unit,course_unit
+AIS,train,AIS_MMSI_412345679_SEG_000,62,processed/ais/train/AIS_MMSI_412345679_SEG_000_f29cc96f9bf8.npz,processed/ais/train/AIS_MMSI_412345679_SEG_000_f29cc96f9bf8.csv,lon|lat|sog|cog,WGS84,kn,degree
+UAV-TSD,train,UAV_sequence_20260307_a_ID_3_SEG_000,101,processed/uav_tsd/train/UAV_sequence_20260307_a_ID_3_SEG_000_d1aabc9fb675.npz,processed/uav_tsd/train/UAV_sequence_20260307_a_ID_3_SEG_000_d1aabc9fb675.csv,lon|lat|sog|cog,WGS84,kn,degree
+AIS,validation,AIS_MMSI_412345678_SEG_001,76,processed/ais/validation/AIS_MMSI_412345678_SEG_001_845b3cf41f57.npz,processed/ais/validation/AIS_MMSI_412345678_SEG_001_845b3cf41f57.csv,lon|lat|sog|cog,WGS84,kn,degree
+UAV-TSD,validation,UAV_sequence_20260307_a_ID_5_SEG_000,94,processed/uav_tsd/validation/UAV_sequence_20260307_a_ID_5_SEG_000_0ba748dace7a.npz,processed/uav_tsd/validation/UAV_sequence_20260307_a_ID_5_SEG_000_0ba748dace7a.csv,lon|lat|sog|cog,WGS84,kn,degree
+AIS,test,AIS_MMSI_412345678_SEG_002,69,processed/ais/test/AIS_MMSI_412345678_SEG_002_9d675e8eecc2.npz,processed/ais/test/AIS_MMSI_412345678_SEG_002_9d675e8eecc2.csv,lon|lat|sog|cog,WGS84,kn,degree
+UAV-TSD,test,UAV_sequence_20260308_b_ID_2_SEG_000,88,processed/uav_tsd/test/UAV_sequence_20260308_b_ID_2_SEG_000_1428659d2e8f.npz,processed/uav_tsd/test/UAV_sequence_20260308_b_ID_2_SEG_000_1428659d2e8f.csv,lon|lat|sog|cog,WGS84,kn,degree
